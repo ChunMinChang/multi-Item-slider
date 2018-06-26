@@ -56,22 +56,22 @@
   /* margin-left: 0; */
 }
 
-.slider .window .post1 {
+.slider .window #post1 {
   background-image: url(https://picsum.photos/1000/500/?image=11);
 }
 
-.slider .window .post2 {
+.slider .window #post2 {
   background-image: url(https://picsum.photos/1000/500/?image=29);
 }
 
-.slider .window .post3 {
+.slider .window #post3 {
   background-image: url(https://picsum.photos/1000/500/?image=37);
 }
 
-.slider .window .post4 {
+.slider .window #post4 {
   background-image: url(https://picsum.photos/1000/500/?image=43);
 }
 
-.slider .window .post5 {
+.slider .window #post5 {
   background-image: url(https://picsum.photos/1000/500/?image=57);
 }
