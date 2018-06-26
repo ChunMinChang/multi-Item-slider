@@ -3,9 +3,13 @@
   overflow: hidden;
 
   background: #000000;
+  position: relative;
 }
 
 .slider .direction {
+  position: absolute;
+  top: 50%;
+  opacity: 0.6;
   width: 50px;
 }
 
