@@ -15,8 +15,18 @@
 }
 
 .slider .left {
+  left: 0;
   background-color: red;
   background-image: url(left.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.slider .right {
+  right: 0;
+  background-color: red;
+  background-image: url(right.svg);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
