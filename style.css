@@ -1,0 +1,19 @@
+.slider {
+  width: 1000px;
+  overflow: hidden;
+
+  background: #000000;
+}
+
+.slider .window {
+  /* this width need to be larger than total width of all the items */
+  width: 2100px;
+}
+
+.item {
+  background: #777777;
+  display: inline-block;
+}
+.item:first-of-type {
+  /* margin-left: 0; */
+}
