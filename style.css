@@ -17,7 +17,32 @@
   width: 30vw;
   height: 30vh;
   margin: 20px;
+
+  background-size: cover;
+  /* background-size: contain; */
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .item:first-of-type {
   /* margin-left: 0; */
+}
+
+.post1 {
+  background-image: url(https://picsum.photos/1000/500/?image=11);
+}
+
+.post2 {
+  background-image: url(https://picsum.photos/1000/500/?image=29);
+}
+
+.post3 {
+  background-image: url(https://picsum.photos/1000/500/?image=37);
+}
+
+.post4 {
+  background-image: url(https://picsum.photos/1000/500/?image=43);
+}
+
+.post5 {
+  background-image: url(https://picsum.photos/1000/500/?image=57);
 }
