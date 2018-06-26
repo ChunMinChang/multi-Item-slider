@@ -5,6 +5,10 @@
   background: #000000;
 }
 
+.slider .direction {
+  width: 50px;
+}
+
 .slider .window {
   /* this width need to be larger than total width of all the items */
   width: 300vw;
