@@ -1,5 +1,12 @@
+let offset = 0;
 function slideItems(dir) {
   console.log("Slide " + dir);
+
+  let numOfItems = document.querySelectorAll(".slider .window .item").length;
+  console.log("number of items: " + numOfItems);
+
+  offset = (offset + numOfItems + (dir == "left" ? -1 : 1)) % numOfItems
+  console.log("offset: " + offset);
 }
 
 function registerEvent(element, event, callback) {
