@@ -9,9 +9,17 @@
 .slider .direction {
   position: absolute;
   background-color: aqua;
-  top: 25%;
-  height: 50%;
-  width: 100%;
+  top: 35%;
+  height: 30%;
+  width: 5%;
+}
+
+.slider .left {
+  background-color: red;
+  background-image: url(left.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .slider .window {
