@@ -8,9 +8,10 @@
 
 .slider .direction {
   position: absolute;
-  top: 50%;
-  opacity: 0.6;
-  width: 50px;
+  background-color: aqua;
+  top: 25%;
+  height: 50%;
+  width: 100%;
 }
 
 .slider .window {
