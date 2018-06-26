@@ -39,7 +39,7 @@
   width: 300vw;
 }
 
-.item {
+.slider .window .item {
   color: white;
   background: #777777;
   display: inline-block;
@@ -52,26 +52,26 @@
   background-repeat: no-repeat;
   background-position: center;
 }
-.item:first-of-type {
+.slider .window .item:first-of-type {
   /* margin-left: 0; */
 }
 
-.post1 {
+.slider .window .post1 {
   background-image: url(https://picsum.photos/1000/500/?image=11);
 }
 
-.post2 {
+.slider .window .post2 {
   background-image: url(https://picsum.photos/1000/500/?image=29);
 }
 
-.post3 {
+.slider .window .post3 {
   background-image: url(https://picsum.photos/1000/500/?image=37);
 }
 
-.post4 {
+.slider .window .post4 {
   background-image: url(https://picsum.photos/1000/500/?image=43);
 }
 
-.post5 {
+.slider .window .post5 {
   background-image: url(https://picsum.photos/1000/500/?image=57);
 }
