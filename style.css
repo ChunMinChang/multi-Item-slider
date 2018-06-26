@@ -14,8 +14,8 @@
   color: white;
   background: #777777;
   display: inline-block;
-  width: 50vw;
-  height: 10vh;
+  width: 30vw;
+  height: 30vh;
   margin: 20px;
 }
 .item:first-of-type {
