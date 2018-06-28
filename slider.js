@@ -5,36 +5,48 @@ let sliderSetting = {
   itemWidth: 0,
 }
 
-function scroll(dir) {
-  console.log("scroll " + dir);
-  if (!sliderSetting.items) {
+function updatePosition(offset) {
+  let silderWindow = document.querySelector(".slider .window");
+  let itemWidth = parseInt(sliderSetting.itemWidth);
+  silderWindow.style.left = -1 * offset * itemWidth;
+}
+
+function updateOffset(setting, dir) {
+  if (!setting.items) {
     console.log("No items to scroll!");
-    return;
+    return false;
   }
+  console.log("number of items: " + sliderSetting.items);
 
   if (!sliderSetting.width || !sliderSetting.itemWidth) {
     console.log("Need to wait to get css settings!");
-    return;
+    return false;
   }
+  console.log("slider width: " + setting.width +
+              ", item width: " + setting.itemWidth);
 
-  console.log("number of items: " + sliderSetting.items);
-
-  let sliderWidth = parseInt(sliderSetting.width);
-  console.log("slider width: " + sliderSetting.width);
-
-  let itemWidth = parseInt(sliderSetting.itemWidth);
-  console.log("Item width: " + sliderSetting.itemWidth);
+  // Get pure values of the width of slider and item without unit(px).
+  let sliderWidth = parseInt(setting.width);
+  let itemWidth = parseInt(setting.itemWidth);
 
   let itemsInWindow = Math.round(sliderWidth / itemWidth);
   console.log("items in window: " + itemsInWindow);
 
-  let maxOffset = sliderSetting.items - itemsInWindow + 1;
-  sliderSetting.offset += (dir == "left" ? -1 : 1) + maxOffset;
-  sliderSetting.offset %= maxOffset;
-  console.log("offset: " + sliderSetting.offset);
+  if (setting.items <= itemsInWindow) {
+    return false;
+  }
 
-  let silderWindow = document.querySelector(".slider .window");
-  silderWindow.style.left = -1 * sliderSetting.offset * itemWidth;
+  let maxOffset = setting.items - itemsInWindow + 1;
+  setting.offset += (dir == "left" ? -1 : 1) + maxOffset;
+  setting.offset %= maxOffset;
+  return true;
+}
+
+function scroll(dir) {
+  console.log("scroll " + dir);
+  if (updateOffset(sliderSetting, dir)) {
+    updatePosition(sliderSetting.offset);
+  }
 }
 
 function setSlider() {
