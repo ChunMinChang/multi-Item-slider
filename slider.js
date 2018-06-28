@@ -38,6 +38,21 @@ function registerButtonEvents() {
   registerEvent(rightBtn, "click", function(e) { scroll("right"); });
 }
 
-document.addEventListener("DOMContentLoaded", function(event) {
-  registerButtonEvents();
+document.addEventListener("readystatechange", event => {
+  switch (event.target.readyState) {
+    case "loading":
+      console.log("The document is loading...");
+      break;
+    case "interactive":
+      console.log("The document is loaded but subresources " +
+                  "like images, css may still be loading.");
+      break;
+    case "complete":
+      console.log("The page is fully loaded!");
+      registerButtonEvents();
+      break;
+    default:
+      console.error("This browser doesn't follow the DOM Event spec!");
+      break;
+  }
 });
