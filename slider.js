@@ -6,9 +6,24 @@ function scroll(dir) {
   let numOfItems = silderWindow.querySelectorAll(".item").length;
   console.log("number of items: " + numOfItems);
 
-  offset = (offset + numOfItems + (dir == "left" ? -1 : 1)) % numOfItems
+  let slider = document.querySelector(".slider");
+  let sliderWidth = window.getComputedStyle(slider).width;
+  let sliderWidthValue = parseInt(sliderWidth);
+  console.log("slider width: " + sliderWidth);
+
+  let silderItem = document.querySelector(".slider .window .item");
+  let itemWidth = window.getComputedStyle(silderItem).width;
+  let itemWidthValue = parseInt(itemWidth);
+  console.log("Item width: " + itemWidth);
+
+  let itemsInWindow = Math.round(sliderWidthValue / itemWidthValue);
+  console.log("items in window: " + itemsInWindow);
+
+  let maxOffset = numOfItems - itemsInWindow + 1;
+  offset = (offset + maxOffset + (dir == "left" ? -1 : 1)) % maxOffset;
   console.log("offset: " + offset);
-  silderWindow.style.left = offset * -30 + "vw";
+
+  silderWindow.style.left = -1 * offset * itemWidthValue;
 }
 
 function registerEvent(element, event, callback) {

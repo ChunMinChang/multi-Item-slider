@@ -46,9 +46,8 @@
   color: white;
   background: #777777;
   display: inline-block;
-  width: 30vw;
-  height: 30vh;
-  margin: 20px;
+  width: 25vw;
+  height: 40vh;
 
   background-size: cover;
   /* background-size: contain; */
