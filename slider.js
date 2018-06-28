@@ -1,6 +1,6 @@
 let offset = 0;
-function slideItems(dir) {
-  console.log("Slide " + dir);
+function scroll(dir) {
+  console.log("scroll " + dir);
 
   let silderWindow = document.querySelector(".slider .window");
   let numOfItems = silderWindow.querySelectorAll(".item").length;
@@ -17,10 +17,10 @@ function registerEvent(element, event, callback) {
 
 function registerButtonEvents() {
   let leftBtn = document.querySelector(".slider .left");
-  registerEvent(leftBtn, "click", function(e) { slideItems("left"); });
+  registerEvent(leftBtn, "click", function(e) { scroll("left"); });
 
   let rightBtn = document.querySelector(".slider .right");
-  registerEvent(rightBtn, "click", function(e) { slideItems("right"); });
+  registerEvent(rightBtn, "click", function(e) { scroll("right"); });
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
