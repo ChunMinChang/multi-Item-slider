@@ -1,29 +1,50 @@
-let offset = 0;
+let sliderSetting = {
+  offset: 0,
+  width: 0,
+  items: 0,
+  itemWidth: 0,
+}
+
 function scroll(dir) {
   console.log("scroll " + dir);
+  if (!sliderSetting.items) {
+    console.log("No items to scroll!");
+    return;
+  }
 
-  let silderWindow = document.querySelector(".slider .window");
-  let numOfItems = silderWindow.querySelectorAll(".item").length;
-  console.log("number of items: " + numOfItems);
+  if (!sliderSetting.width || !sliderSetting.itemWidth) {
+    console.log("Need to wait to get css settings!");
+    return;
+  }
 
-  let slider = document.querySelector(".slider");
-  let sliderWidth = window.getComputedStyle(slider).width;
-  let sliderWidthValue = parseInt(sliderWidth);
-  console.log("slider width: " + sliderWidth);
+  console.log("number of items: " + sliderSetting.width.items);
 
-  let silderItem = document.querySelector(".slider .window .item");
-  let itemWidth = window.getComputedStyle(silderItem).width;
-  let itemWidthValue = parseInt(itemWidth);
-  console.log("Item width: " + itemWidth);
+  let sliderWidthValue = parseInt(sliderSetting.width);
+  console.log("slider width: " + sliderSetting.width);
+
+  let itemWidthValue = parseInt(sliderSetting.itemWidth);
+  console.log("Item width: " + sliderSetting.itemWidth);
 
   let itemsInWindow = Math.round(sliderWidthValue / itemWidthValue);
   console.log("items in window: " + itemsInWindow);
 
-  let maxOffset = numOfItems - itemsInWindow + 1;
-  offset = (offset + maxOffset + (dir == "left" ? -1 : 1)) % maxOffset;
-  console.log("offset: " + offset);
+  let maxOffset = sliderSetting.items - itemsInWindow + 1;
+  sliderSetting.offset = (sliderSetting.offset + maxOffset + (dir == "left" ? -1 : 1)) % maxOffset;
+  console.log("offset: " + sliderSetting.offset);
 
-  silderWindow.style.left = -1 * offset * itemWidthValue;
+  let silderWindow = document.querySelector(".slider .window");
+  silderWindow.style.left = -1 * sliderSetting.offset * itemWidthValue;
+}
+
+function setSlider() {
+  let silderWindow = document.querySelector(".slider .window");
+  sliderSetting.items = silderWindow.querySelectorAll(".item").length;
+
+  let slider = document.querySelector(".slider");
+  sliderSetting.width = window.getComputedStyle(slider).width;
+
+  let silderItem = document.querySelector(".slider .window .item");
+  sliderSetting.itemWidth = window.getComputedStyle(silderItem).width;
 }
 
 function registerEvent(element, event, callback) {
@@ -46,10 +67,13 @@ document.addEventListener("readystatechange", event => {
     case "interactive":
       console.log("The document is loaded but subresources " +
                   "like images, css may still be loading.");
+      // Init.
+      registerButtonEvents();
       break;
     case "complete":
       console.log("The page is fully loaded!");
-      registerButtonEvents();
+      // Get css values.
+      setSlider();
       break;
     default:
       console.error("This browser doesn't follow the DOM Event spec!");
