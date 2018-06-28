@@ -17,7 +17,7 @@ function scroll(dir) {
     return;
   }
 
-  console.log("number of items: " + sliderSetting.width.items);
+  console.log("number of items: " + sliderSetting.items);
 
   let sliderWidthValue = parseInt(sliderSetting.width);
   console.log("slider width: " + sliderSetting.width);
