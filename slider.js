@@ -19,21 +19,22 @@ function scroll(dir) {
 
   console.log("number of items: " + sliderSetting.items);
 
-  let sliderWidthValue = parseInt(sliderSetting.width);
+  let sliderWidth = parseInt(sliderSetting.width);
   console.log("slider width: " + sliderSetting.width);
 
-  let itemWidthValue = parseInt(sliderSetting.itemWidth);
+  let itemWidth = parseInt(sliderSetting.itemWidth);
   console.log("Item width: " + sliderSetting.itemWidth);
 
-  let itemsInWindow = Math.round(sliderWidthValue / itemWidthValue);
+  let itemsInWindow = Math.round(sliderWidth / itemWidth);
   console.log("items in window: " + itemsInWindow);
 
   let maxOffset = sliderSetting.items - itemsInWindow + 1;
-  sliderSetting.offset = (sliderSetting.offset + maxOffset + (dir == "left" ? -1 : 1)) % maxOffset;
+  sliderSetting.offset += (dir == "left" ? -1 : 1) + maxOffset;
+  sliderSetting.offset %= maxOffset;
   console.log("offset: " + sliderSetting.offset);
 
   let silderWindow = document.querySelector(".slider .window");
-  silderWindow.style.left = -1 * sliderSetting.offset * itemWidthValue;
+  silderWindow.style.left = -1 * sliderSetting.offset * itemWidth;
 }
 
 function setSlider() {
