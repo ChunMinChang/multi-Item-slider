@@ -36,9 +36,11 @@ function updateOffset(setting, dir) {
     return false;
   }
 
-  let maxOffset = setting.items - itemsInWindow + 1;
-  setting.offset += (dir == "left" ? -1 : 1) + maxOffset;
-  setting.offset %= maxOffset;
+  let maxOffset = setting.items - itemsInWindow;
+  let round = maxOffset + 1;
+  let move = dir == "left" ? -1 : 1;
+  setting.offset = (setting.offset + move + round) % round;
+  console.log("offset : " + setting.offset);
   return true;
 }
 
