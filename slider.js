@@ -60,7 +60,7 @@ function scroll(dir) {
   }
 }
 
-function setSlider() {
+function initSliderSetting() {
   let silderWindow = document.querySelector(".slider .window");
   sliderSetting.items = silderWindow.querySelectorAll(".item").length;
 
@@ -97,7 +97,7 @@ document.addEventListener("readystatechange", event => {
     case "complete":
       log("The page is fully loaded!");
       // Get css values.
-      setSlider();
+      initSliderSetting();
       break;
     default:
       console.error("This browser doesn't follow the DOM Event spec!");
