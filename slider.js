@@ -78,7 +78,7 @@ function updateOffset(setting, dir) {
   }
 
   if (setting.items <= setting.itemsInView) {
-    log("No need to update position since items are all in the view.");
+    log("No need to update position since items are all in the current view.");
     return false;
   }
 
