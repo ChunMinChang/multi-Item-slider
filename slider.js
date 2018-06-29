@@ -5,6 +5,10 @@ let sliderSetting = {
   itemWidth: 0,
 }
 
+function log(msg) {
+  console.log(msg);
+}
+
 function updatePosition(offset) {
   let silderWindow = document.querySelector(".slider .window");
   let itemWidth = parseInt(sliderSetting.itemWidth);
@@ -13,16 +17,16 @@ function updatePosition(offset) {
 
 function updateOffset(setting, dir) {
   if (!setting.items) {
-    console.log("No items to scroll!");
+    log("No items to scroll!");
     return false;
   }
-  console.log("number of items: " + sliderSetting.items);
+  log("number of items: " + sliderSetting.items);
 
   if (!sliderSetting.width || !sliderSetting.itemWidth) {
-    console.log("Need to wait to get css settings!");
+    log("Need to wait to get css settings!");
     return false;
   }
-  console.log("slider width: " + setting.width +
+  log("slider width: " + setting.width +
               ", item width: " + setting.itemWidth);
 
   // Get pure values of the width of slider and item without unit(px).
@@ -30,7 +34,7 @@ function updateOffset(setting, dir) {
   let itemWidth = parseInt(setting.itemWidth);
 
   let itemsInWindow = Math.round(sliderWidth / itemWidth);
-  console.log("items in window: " + itemsInWindow);
+  log("items in window: " + itemsInWindow);
 
   if (setting.items <= itemsInWindow) {
     return false;
@@ -40,12 +44,12 @@ function updateOffset(setting, dir) {
   let round = maxOffset + 1;
   let move = dir == "left" ? -1 : 1;
   setting.offset = (setting.offset + move + round) % round;
-  console.log("offset : " + setting.offset);
+  log("offset : " + setting.offset);
   return true;
 }
 
 function scroll(dir) {
-  console.log("scroll " + dir);
+  log("scroll " + dir);
   if (updateOffset(sliderSetting, dir)) {
     updatePosition(sliderSetting.offset);
   }
@@ -77,16 +81,16 @@ function registerButtonEvents() {
 document.addEventListener("readystatechange", event => {
   switch (event.target.readyState) {
     case "loading":
-      console.log("The document is loading...");
+      log("The document is loading...");
       break;
     case "interactive":
-      console.log("The document is loaded but subresources " +
+      log("The document is loaded but subresources " +
                   "like images, css may still be loading.");
       // Init.
       registerButtonEvents();
       break;
     case "complete":
-      console.log("The page is fully loaded!");
+      log("The page is fully loaded!");
       // Get css values.
       setSlider();
       break;
