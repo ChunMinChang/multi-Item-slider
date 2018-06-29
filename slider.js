@@ -1,53 +1,3 @@
-//   Slider Class contains common used variables
-// ----------------------------------------------------------------------------
-class Slider {
-  constructor(viewWidth = 0, items = 0, itemWidth = 0) {
-    console.assert(viewWidth >= 0, "invalid viewWidth!");
-    console.assert(items >= 0, "invalid items!");
-    console.assert(itemWidth >= 0, "invalid itemWidth!");
-
-    this.offset = 0;
-    this.viewWidth = viewWidth;
-    this.items = items;
-    this.itemWidth = itemWidth;
-  }
-
-  // Getters:
-  get viewsInSlider() {
-    return this.getViewsInSlider();
-  }
-
-  get itemsInView() {
-    return this.getItemsInView();
-  }
-
-  // Methods:
-  getItemsInView() {
-    log("slider width: " + this.viewWidth +
-        ", item width: " + this.itemWidth);
-
-    if (this.itemWidth <= 0 || this.viewWidth < 0) {
-      log("Invalid item width!");
-      return;
-    }
-
-    // Get pure values of the width of slider and item without unit(px).
-    let vw = parseInt(this.viewWidth);
-    let iw = parseInt(this.itemWidth);
-    let itemsInView = Math.round(vw / iw);
-    log("items in view: " + itemsInView);
-    return itemsInView;
-  }
-
-  getMaxOffset() {
-    return this.items - this.getItemsInView();
-  }
-
-  getViewsInSlider() {
-    return this.getMaxOffset() + 1;
-  }
-}
-
 //   Utilities
 // ----------------------------------------------------------------------------
 const Direction = Object.freeze({
@@ -59,56 +9,87 @@ function log(msg) {
   console.log(msg);
 }
 
+//   Slider class
+// ----------------------------------------------------------------------------
+class Slider {
+  constructor(viewWidth = 0, items = 0, itemWidth = 0) {
+    console.assert(viewWidth >= 0, "invalid viewWidth!");
+    console.assert(items >= 0, "invalid items!");
+    console.assert(itemWidth >= 0, "invalid itemWidth!");
+
+    this.distance = 0;
+    this.offset = 0;
+    this.viewWidth = viewWidth;
+    this.items = items;
+    this.itemWidth = itemWidth;
+  }
+
+  // Methods:
+  updateDistance(dir) {
+    if (!this.updateOffset(dir)) {
+      return false;
+    }
+    this.distance = this.offset * this.itemWidth;
+    return true;
+  }
+
+  updateOffset(dir) {
+    if (!this.items || !this.viewWidth || !this.itemWidth ||
+        this.getItemsInView() <= 0 || 
+        this.items <= this.getItemsInView()) {
+      return false;
+    }
+
+    let views = this.getViewsInSlider();
+    let move = dir ? 1 : -1;
+    // Add `views` before calculating modulo to avoid negative
+    this.offset = (this.offset + move + views) % views;
+    return true;
+  }
+
+  getItemsInView() {
+    if (this.itemWidth <= 0 || this.viewWidth < 0) {
+      return -1;
+    }
+
+    return Math.round(this.viewWidth / this.itemWidth);
+  }
+
+  getMaxOffset() {
+    return this.items - this.getItemsInView();
+  }
+
+  getViewsInSlider() {
+    return this.getMaxOffset() + 1;
+  }
+}
+
 //   Core Scripts
 // ----------------------------------------------------------------------------
 let sliderSetting = new Slider();
 
-function updatePosition(setting) {
+function updatePosition(dir, setting) {
+  if (!setting.updateDistance(dir)) {
+    return;
+  }
   let silderWindow = document.querySelector(".slider .window");
-  let itemWidth = parseInt(setting.itemWidth);
-  silderWindow.style.left = -1 * setting.offset * itemWidth;
-}
-
-function updateOffset(setting, dir) {
-  if (!setting.items) {
-    log("No items to scroll!");
-    return false;
-  }
-  log("number of items: " + setting.items);
-
-  if (!setting.viewWidth || !setting.itemWidth) {
-    log("Need to wait to get css settings!");
-    return false;
-  }
-
-  if (setting.items <= setting.itemsInView) {
-    log("No need to update position since items are all in the current view.");
-    return false;
-  }
-
-  let views = setting.viewsInSlider;
-  let move = dir ? 1 : -1;
-  setting.offset = (setting.offset + move + views) % views;
-  log("offset : " + setting.offset);
-  return true;
+  silderWindow.style.left = -1 * setting.distance;
 }
 
 function scroll(dir) {
   log("scroll " + (dir ? "right" : "left"));
-  if (updateOffset(sliderSetting, dir)) {
-    updatePosition(sliderSetting);
-  }
+  updatePosition(dir, sliderSetting);
 }
 
 function initSliderSetting() {
   let slider = document.querySelector(".slider");
-  sliderSetting.viewWidth = window.getComputedStyle(slider).width;
-
   let silderWindow = document.querySelector(".slider .window");
-  sliderSetting.items = silderWindow.querySelectorAll(".item").length;
-
   let silderItem = document.querySelector(".slider .window .item");
-  sliderSetting.itemWidth = window.getComputedStyle(silderItem).width;
+
+  sliderSetting.items = silderWindow.querySelectorAll(".item").length;
+  // Get pure values of the width of slider and item without unit(px).
+  sliderSetting.viewWidth = parseInt(window.getComputedStyle(slider).width);
+  sliderSetting.itemWidth = parseInt(window.getComputedStyle(silderItem).width);
 }
 
 function registerEvent(element, event, callback) {
