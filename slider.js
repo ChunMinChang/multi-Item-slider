@@ -42,7 +42,7 @@ class Slider {
 
     let views = this.getViewsInSlider();
     let move = dir ? 1 : -1;
-    // Add `views` before calculating modulo to avoid negative
+    // Add `views` before calculating modulo to avoid negative results.
     this.offset = (this.offset + move + views) % views;
     return true;
   }
