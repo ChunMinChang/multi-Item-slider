@@ -32,7 +32,7 @@ function updateOffset(setting, dir) {
     return false;
   }
   log("slider width: " + setting.width +
-              ", item width: " + setting.itemWidth);
+      ", item width: " + setting.itemWidth);
 
   // Get pure values of the width of slider and item without unit(px).
   let sliderWidth = parseInt(setting.width);
