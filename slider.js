@@ -33,17 +33,17 @@ function updateOffset(setting, dir) {
   let sliderWidth = parseInt(setting.width);
   let itemWidth = parseInt(setting.itemWidth);
 
-  let itemsInWindow = Math.round(sliderWidth / itemWidth);
-  log("items in window: " + itemsInWindow);
+  let itemsInView = Math.round(sliderWidth / itemWidth);
+  log("items in window: " + itemsInView);
 
-  if (setting.items <= itemsInWindow) {
+  if (setting.items <= itemsInView) {
     return false;
   }
 
-  let maxOffset = setting.items - itemsInWindow;
-  let round = maxOffset + 1;
+  let maxOffset = setting.items - itemsInView;
+  let viewsInWindow = maxOffset + 1;
   let move = dir == "left" ? -1 : 1;
-  setting.offset = (setting.offset + move + round) % round;
+  setting.offset = (setting.offset + move + viewsInWindow) % viewsInWindow;
   log("offset : " + setting.offset);
   return true;
 }
