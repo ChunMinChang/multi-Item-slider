@@ -101,11 +101,11 @@ function scroll(dir) {
 }
 
 function initSliderSetting() {
-  let silderWindow = document.querySelector(".slider .window");
-  sliderSetting.items = silderWindow.querySelectorAll(".item").length;
-
   let slider = document.querySelector(".slider");
   sliderSetting.viewWidth = window.getComputedStyle(slider).width;
+
+  let silderWindow = document.querySelector(".slider .window");
+  sliderSetting.items = silderWindow.querySelectorAll(".item").length;
 
   let silderItem = document.querySelector(".slider .window .item");
   sliderSetting.itemWidth = window.getComputedStyle(silderItem).width;
