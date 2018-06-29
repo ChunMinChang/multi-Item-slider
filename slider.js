@@ -1,8 +1,5 @@
-const Direction = Object.freeze({
-  Left: 0,
-  Right: 1,
-});
-
+//   Slider Class contains common used variables
+// ----------------------------------------------------------------------------
 class Slider {
   constructor(offset = 0, viewWidth = 0, items = 0, itemWidth = 0) {
     this.offset = offset;
@@ -47,11 +44,20 @@ class Slider {
   }
 }
 
-let sliderSetting = new Slider();
+//   Utilities
+// ----------------------------------------------------------------------------
+const Direction = Object.freeze({
+  Left: 0,
+  Right: 1,
+});
 
 function log(msg) {
   console.log(msg);
 }
+
+//   Core Scripts
+// ----------------------------------------------------------------------------
+let sliderSetting = new Slider();
 
 function updatePosition(setting) {
   let silderWindow = document.querySelector(".slider .window");
