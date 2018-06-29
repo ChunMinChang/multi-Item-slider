@@ -1,13 +1,12 @@
 //   Slider Class contains common used variables
 // ----------------------------------------------------------------------------
 class Slider {
-  constructor(offset = 0, viewWidth = 0, items = 0, itemWidth = 0) {
-    console.assert(offset >= 0, "invalid offset!");
+  constructor(viewWidth = 0, items = 0, itemWidth = 0) {
     console.assert(viewWidth >= 0, "invalid viewWidth!");
     console.assert(items >= 0, "invalid items!");
     console.assert(itemWidth >= 0, "invalid itemWidth!");
 
-    this.offset = offset;
+    this.offset = 0;
     this.viewWidth = viewWidth;
     this.items = items;
     this.itemWidth = itemWidth;
