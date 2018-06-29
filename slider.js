@@ -3,21 +3,60 @@ const Direction = Object.freeze({
   Right: 1,
 });
 
-let sliderSetting = {
-  offset: 0,
-  width: 0,
-  items: 0,
-  itemWidth: 0,
-};
+class Slider {
+  constructor(offset = 0, viewWidth = 0, items = 0, itemWidth = 0) {
+    this.offset = offset;
+    this.viewWidth = viewWidth;
+    this.items = items;
+    this.itemWidth = itemWidth;
+  }
+
+  // Getters:
+  get viewsInSlider() {
+    return this.getViewsInSlider();
+  }
+
+  get itemsInView() {
+    return this.getItemsInView();
+  }
+
+  // Methods:
+  getItemsInView() {
+    log("slider width: " + this.viewWidth +
+        ", item width: " + this.itemWidth);
+
+    if (this.itemWidth <= 0 || this.viewWidth < 0) {
+      log("Invalid item width!");
+      return;
+    }
+
+    // Get pure values of the width of slider and item without unit(px).
+    let vw = parseInt(this.viewWidth);
+    let iw = parseInt(this.itemWidth);
+    let itemsInView = Math.round(vw / iw);
+    log("items in view: " + itemsInView);
+    return itemsInView;
+  }
+
+  getMaxOffset() {
+    return this.items - this.getItemsInView();
+  }
+
+  getViewsInSlider() {
+    return this.getMaxOffset() + 1;
+  }
+}
+
+let sliderSetting = new Slider();
 
 function log(msg) {
   console.log(msg);
 }
 
-function updatePosition(offset) {
+function updatePosition(setting) {
   let silderWindow = document.querySelector(".slider .window");
-  let itemWidth = parseInt(sliderSetting.itemWidth);
-  silderWindow.style.left = -1 * offset * itemWidth;
+  let itemWidth = parseInt(setting.itemWidth);
+  silderWindow.style.left = -1 * setting.offset * itemWidth;
 }
 
 function updateOffset(setting, dir) {
@@ -25,30 +64,21 @@ function updateOffset(setting, dir) {
     log("No items to scroll!");
     return false;
   }
-  log("number of items: " + sliderSetting.items);
+  log("number of items: " + setting.items);
 
-  if (!sliderSetting.width || !sliderSetting.itemWidth) {
+  if (!setting.viewWidth || !setting.itemWidth) {
     log("Need to wait to get css settings!");
     return false;
   }
-  log("slider width: " + setting.width +
-      ", item width: " + setting.itemWidth);
 
-  // Get pure values of the width of slider and item without unit(px).
-  let sliderWidth = parseInt(setting.width);
-  let itemWidth = parseInt(setting.itemWidth);
-
-  let itemsInView = Math.round(sliderWidth / itemWidth);
-  log("items in window: " + itemsInView);
-
-  if (setting.items <= itemsInView) {
+  if (setting.items <= setting.itemsInView) {
+    log("No need to update position since items are all in the view.");
     return false;
   }
 
-  let maxOffset = setting.items - itemsInView;
-  let viewsInSlider = maxOffset + 1;
+  let views = setting.viewsInSlider;
   let move = dir ? 1 : -1;
-  setting.offset = (setting.offset + move + viewsInSlider) % viewsInSlider;
+  setting.offset = (setting.offset + move + views) % views;
   log("offset : " + setting.offset);
   return true;
 }
@@ -56,7 +86,7 @@ function updateOffset(setting, dir) {
 function scroll(dir) {
   log("scroll " + (dir ? "right" : "left"));
   if (updateOffset(sliderSetting, dir)) {
-    updatePosition(sliderSetting.offset);
+    updatePosition(sliderSetting);
   }
 }
 
@@ -65,7 +95,7 @@ function initSliderSetting() {
   sliderSetting.items = silderWindow.querySelectorAll(".item").length;
 
   let slider = document.querySelector(".slider");
-  sliderSetting.width = window.getComputedStyle(slider).width;
+  sliderSetting.viewWidth = window.getComputedStyle(slider).width;
 
   let silderItem = document.querySelector(".slider .window .item");
   sliderSetting.itemWidth = window.getComputedStyle(silderItem).width;
