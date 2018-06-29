@@ -1,3 +1,8 @@
+const Direction = Object.freeze({
+  Left: 0,
+  Right: 1,
+});
+
 let sliderSetting = {
   offset: 0,
   width: 0,
@@ -42,14 +47,14 @@ function updateOffset(setting, dir) {
 
   let maxOffset = setting.items - itemsInView;
   let viewsInWindow = maxOffset + 1;
-  let move = dir == "left" ? -1 : 1;
+  let move = dir ? 1 : -1;
   setting.offset = (setting.offset + move + viewsInWindow) % viewsInWindow;
   log("offset : " + setting.offset);
   return true;
 }
 
 function scroll(dir) {
-  log("scroll " + dir);
+  log("scroll " + (dir ? "right" : "left"));
   if (updateOffset(sliderSetting, dir)) {
     updatePosition(sliderSetting.offset);
   }
@@ -72,10 +77,10 @@ function registerEvent(element, event, callback) {
 
 function registerButtonEvents() {
   let leftBtn = document.querySelector(".slider .left");
-  registerEvent(leftBtn, "click", function(e) { scroll("left"); });
+  registerEvent(leftBtn, "click", function(e) { scroll(Direction.Left); });
 
   let rightBtn = document.querySelector(".slider .right");
-  registerEvent(rightBtn, "click", function(e) { scroll("right"); });
+  registerEvent(rightBtn, "click", function(e) { scroll(Direction.Right); });
 }
 
 document.addEventListener("readystatechange", event => {
