@@ -3,7 +3,7 @@ let sliderSetting = {
   width: 0,
   items: 0,
   itemWidth: 0,
-}
+};
 
 function log(msg) {
   console.log(msg);
