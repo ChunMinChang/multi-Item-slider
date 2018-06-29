@@ -46,9 +46,9 @@ function updateOffset(setting, dir) {
   }
 
   let maxOffset = setting.items - itemsInView;
-  let viewsInWindow = maxOffset + 1;
+  let viewsInSlider = maxOffset + 1;
   let move = dir ? 1 : -1;
-  setting.offset = (setting.offset + move + viewsInWindow) % viewsInWindow;
+  setting.offset = (setting.offset + move + viewsInSlider) % viewsInSlider;
   log("offset : " + setting.offset);
   return true;
 }
