@@ -34,9 +34,9 @@
 
 .slider .window {
   /* this width need to be larger than total width of all the items */
-  /* There is 10 items in this slider and each width is 25vw(set below),
-     so the width here must be set at least 10 * 25 = 250 vw */
-  width: 300vw;
+  /* There is 10 items in this slider and each width is 50vw(set below),
+     so the width here must be set at least 10 * 50 = 500 vw */
+  width: 600vw;
   position:relative;
   background-color: green;
   margin: 30px 0px 30px 0px;
@@ -51,7 +51,7 @@
   color: white;
   background: #777777;
   display: inline-block;
-  width: 25vw;
+  width: 50vw;
   height: 40vh;
 
   background-size: cover;

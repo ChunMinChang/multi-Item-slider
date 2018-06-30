@@ -107,7 +107,7 @@ function initSlider() {
 }
 
 function initPosition(slider) {
-  slider.start = - 0.7;
+  slider.start = - 0.5;
   slider.updateDistance();
   setPosition(slider);
 }
