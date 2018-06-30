@@ -59,12 +59,12 @@ class Slider {
     return Math.round(this.viewWidth / this.itemWidth);
   }
 
-  getMaxOffset() {
-    return this.items - this.getItemsInView();
-  }
-
   getViewsInSlider() {
     return this.getMaxOffset() + 1;
+  }
+
+  getMaxOffset() {
+    return this.items - this.getItemsInView();
   }
 }
 
