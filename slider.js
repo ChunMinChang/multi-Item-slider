@@ -25,11 +25,15 @@ class Slider {
   }
 
   // Methods:
-  updateDistance(dir) {
+  updateDistance() {
+    this.distance = this.offset * this.itemWidth;
+  }
+
+  slide(dir) {
     if (!this.updateOffset(dir)) {
       return false;
     }
-    this.distance = this.offset * this.itemWidth;
+    this.updateDistance();
     return true;
   }
 
@@ -68,12 +72,16 @@ class Slider {
 // ----------------------------------------------------------------------------
 let sliderSetting = new Slider();
 
-function updatePosition(dir, setting) {
-  if (!setting.updateDistance(dir)) {
-    return;
-  }
+function setPosition(setting) {
   let silderWindow = document.querySelector(".slider .window");
   silderWindow.style.left = -1 * setting.distance;
+}
+
+function updatePosition(dir, setting) {
+  if (!setting.slide(dir)) {
+    return;
+  }
+  setPosition(setting);
 }
 
 function scroll(dir) {
