@@ -28,7 +28,7 @@ class Slider {
 
   // Methods:
   updateDistance() {
-    this.distance = this.offset * this.itemWidth;
+    this.distance = (this.start + this.offset) * this.itemWidth;
   }
 
   slide(dir) {
@@ -66,7 +66,9 @@ class Slider {
   }
 
   getMaxOffset() {
-    return this.items - this.getItemsInView();
+    console.assert(this.start > -1 && this.start <= 0, "invalid start!");
+    let padding = this.start < 0 ? 1 : 0;
+    return this.items - this.getItemsInView() + padding;
   }
 }
 
@@ -100,6 +102,14 @@ function initSlider() {
   // Get pure values of the width of slider and item without unit(px).
   sliderObj.viewWidth = parseInt(window.getComputedStyle(slider).width);
   sliderObj.itemWidth = parseInt(window.getComputedStyle(silderItem).width);
+
+  initPosition(sliderObj);
+}
+
+function initPosition(slider) {
+  slider.start = - 0.7;
+  slider.updateDistance();
+  setPosition(slider);
 }
 
 function registerEvent(element, event, callback) {
