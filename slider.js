@@ -119,7 +119,7 @@ document.addEventListener("readystatechange", event => {
       break;
     case "interactive":
       log("The document is loaded but subresources " +
-                  "like images, css may still be loading.");
+          "like images, css may still be loading.");
       // Init.
       registerButtonEvents();
       break;
