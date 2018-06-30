@@ -12,13 +12,15 @@ function log(msg) {
 //   Slider class
 // ----------------------------------------------------------------------------
 class Slider {
-  constructor(viewWidth = 0, items = 0, itemWidth = 0) {
+  constructor(start = 0, viewWidth = 0, items = 0, itemWidth = 0) {
+    console.assert(start > -1 && start <= 0, "invalid start!");
     console.assert(viewWidth >= 0, "invalid viewWidth!");
     console.assert(items >= 0, "invalid items!");
     console.assert(itemWidth >= 0, "invalid itemWidth!");
 
     this.distance = 0;
     this.offset = 0;
+    this.start = start;
     this.viewWidth = viewWidth;
     this.items = items;
     this.itemWidth = itemWidth;
