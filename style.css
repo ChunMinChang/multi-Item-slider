@@ -34,8 +34,8 @@
 
 .slider .window {
   /* this width need to be larger than total width of all the items */
-  /* There is 5 items in this slider and each width is 30vw(set below),
-     so the width here must be set at least 5 * 30 = 150 vw */
+  /* There is 10 items in this slider and each width is 25vw(set below),
+     so the width here must be set at least 10 * 25 = 250 vw */
   width: 300vw;
   position:relative;
   background-color: green;
