@@ -74,7 +74,7 @@ let sliderObj = new Slider();
 
 function setPosition(slider) {
   let silderWindow = document.querySelector(".slider .window");
-  silderWindow.style.left = -1 * slider.distance;
+  silderWindow.style.left = -1 * slider.distance + "px";
 }
 
 function updatePosition(dir, slider) {
