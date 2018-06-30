@@ -40,6 +40,11 @@
   position:relative;
   background-color: green;
   margin: 30px 0px 30px 0px;
+
+  /* Need to set `style="left: 0px;"` in html of this class to force it work
+     on the first change of the `.window` HTML element. */
+  transition-duration: 1s;
+  transition-timing-function: ease;
 }
 
 .slider .window .item {

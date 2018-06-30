@@ -13,7 +13,16 @@
     <div class="direction right">
       next
     </div>
-    <div class="window">
+    <!--
+      We set `style="left: 0px;"` here to force `transition`
+      in `window` css class works when the first click
+      on next/right or prev/left button.
+      If we remove `style="left: 0px;"` here,
+      then the animation will work from second
+      click of the buttons. There is no animation
+      when the buttons is clicked at the first time.
+    -->
+    <div class="window" style="left: 0px;">
       <div id="post1" class="item">
         item 1
       </div>
