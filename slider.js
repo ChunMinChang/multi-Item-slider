@@ -70,34 +70,34 @@ class Slider {
 
 //   Core Scripts
 // ----------------------------------------------------------------------------
-let sliderSetting = new Slider();
+let sliderObj = new Slider();
 
-function setPosition(setting) {
+function setPosition(slider) {
   let silderWindow = document.querySelector(".slider .window");
-  silderWindow.style.left = -1 * setting.distance;
+  silderWindow.style.left = -1 * slider.distance;
 }
 
-function updatePosition(dir, setting) {
-  if (!setting.slide(dir)) {
+function updatePosition(dir, slider) {
+  if (!slider.slide(dir)) {
     return;
   }
-  setPosition(setting);
+  setPosition(slider);
 }
 
 function scroll(dir) {
   log("scroll " + (dir ? "right" : "left"));
-  updatePosition(dir, sliderSetting);
+  updatePosition(dir, sliderObj);
 }
 
-function initSliderSetting() {
+function initSlider() {
   let slider = document.querySelector(".slider");
   let silderWindow = document.querySelector(".slider .window");
   let silderItem = document.querySelector(".slider .window .item");
 
-  sliderSetting.items = silderWindow.querySelectorAll(".item").length;
+  sliderObj.items = silderWindow.querySelectorAll(".item").length;
   // Get pure values of the width of slider and item without unit(px).
-  sliderSetting.viewWidth = parseInt(window.getComputedStyle(slider).width);
-  sliderSetting.itemWidth = parseInt(window.getComputedStyle(silderItem).width);
+  sliderObj.viewWidth = parseInt(window.getComputedStyle(slider).width);
+  sliderObj.itemWidth = parseInt(window.getComputedStyle(silderItem).width);
 }
 
 function registerEvent(element, event, callback) {
@@ -126,7 +126,7 @@ document.addEventListener("readystatechange", event => {
     case "complete":
       log("The page is fully loaded!");
       // Get css values.
-      initSliderSetting();
+      initSlider();
       break;
     default:
       console.error("This browser doesn't follow the DOM Event spec!");
